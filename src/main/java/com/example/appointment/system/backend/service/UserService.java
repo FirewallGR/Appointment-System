@@ -72,7 +72,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void createNewUser(User user){
-        user.setRoles(List.of(roleRepository.findByName("ROLE_USER").get()));
+        user.setRoles(List.of(roleRepository.findByName("ROLE_PATIENT").get()));
         userRepository.save(user);
     }
     public void deleteByUsername(String username) {

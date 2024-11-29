@@ -43,27 +43,23 @@ public class UserController {
     }
     @PostMapping("/reg")
     public ResponseEntity<?> registration(@RequestBody RegistrationUserDto regUser) {
-        // Проверка всех полей
-        if (regUser.getUsername() == null || regUser.getPassword() == null || regUser.getConfirmPassword() == null) {
-            return new ResponseEntity<>(new AppErorr(HttpStatus.BAD_REQUEST.value(), "Все поля должны быть заполнены!"), HttpStatus.BAD_REQUEST);
+        if (regUser.getUsername() == null || regUser.getPassword() == null ||
+                regUser.getName() == null || regUser.getSecondName() == null ||
+                regUser.getConfirmPassword() == null) {
+            return new ResponseEntity<>(new AppErorr(HttpStatus.BAD_REQUEST.value(), "Все обязательные поля должны быть заполнены!"), HttpStatus.BAD_REQUEST);
         }
 
         if (!regUser.getPassword().equals(regUser.getConfirmPassword())) {
             return new ResponseEntity<>(new AppErorr(HttpStatus.BAD_REQUEST.value(), "Пароли не совпадают"), HttpStatus.BAD_REQUEST);
-        } else if (regUser.getPassword() == null || regUser.getPassword().isEmpty()) {
-            return new ResponseEntity<>(new AppErorr(HttpStatus.BAD_REQUEST.value(), "Пароль не должен быть пустым"), HttpStatus.BAD_REQUEST);
-        }else{
-            Optional<User> user = userService.findByUsername(regUser.getUsername());
-
-            if(user.isPresent()){
-                return new ResponseEntity<>(new AppErorr(HttpStatus.BAD_REQUEST.value(), "Имя пользователя занято"), HttpStatus.BAD_REQUEST);
-            }
         }
 
-        // using mapper
-        User registrationUser = mapper.RegDtoToUser(regUser);
+        Optional<User> existingUser = userService.findByUsername(regUser.getUsername());
+        if (existingUser.isPresent()) {
+            return new ResponseEntity<>(new AppErorr(HttpStatus.BAD_REQUEST.value(), "Имя пользователя занято"), HttpStatus.BAD_REQUEST);
+        }
 
-        userService.createNewUser(registrationUser);
+        User newUser = mapper.RegDtoToUser(regUser);
+        userService.createNewUser(newUser);
         return ResponseEntity.ok("Успешная регистрация");
     }
 }

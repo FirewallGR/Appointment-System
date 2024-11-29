@@ -31,7 +31,7 @@ public class SecurityConfig {
                         auth.requestMatchers("/unsecured").permitAll()
                                 .requestMatchers("/secured").authenticated()
                                 .requestMatchers("/admin").hasRole("ADMIN")
-                                .requestMatchers("/info").hasRole("USER")
+                                .requestMatchers("/info").hasRole("PATIENT")
                                 .anyRequest().permitAll()
                 ).addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exep ->

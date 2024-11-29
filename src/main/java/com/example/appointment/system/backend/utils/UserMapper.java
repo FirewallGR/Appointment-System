@@ -18,6 +18,9 @@ public class UserMapper {
         User user = new User();
         user.setUsername(registrationUserDto.getUsername());
         user.setPassword(encodedPassword);
+        user.setName(registrationUserDto.getName());
+        user.setSecondName(registrationUserDto.getSecondName());
+        user.setThirdName(registrationUserDto.getThirdName());
         return user;
     }
 }

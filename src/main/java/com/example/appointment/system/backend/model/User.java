@@ -2,23 +2,35 @@ package com.example.appointment.system.backend.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Collection;
+import java.util.UUID;
 
 @Data
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
+    @UuidGenerator
     @Column(name = "id")
-    private Long id;
+    private UUID id;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "second_name", nullable = false)
+    private String secondName;
+
+    @Column(name = "third_name")
+    private String thirdName;
 
     @ManyToMany
     @JoinTable(
@@ -26,6 +38,5 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-
     private Collection<Role> roles;
 }
