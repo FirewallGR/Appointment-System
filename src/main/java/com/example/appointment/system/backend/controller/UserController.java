@@ -1,9 +1,9 @@
 package com.example.appointment.system.backend.controller;
 
 import com.example.appointment.system.backend.utils.JwtTokenUtils;
-import com.example.appointment.system.backend.dto.JwtResponce;
-import com.example.appointment.system.backend.dto.JwtRequest;
-import com.example.appointment.system.backend.dto.RegistrationUserDto;
+import com.example.appointment.system.backend.dto.JwtResponceDTO;
+import com.example.appointment.system.backend.dto.JwtRequestDTO;
+import com.example.appointment.system.backend.dto.RegistrationUserDTO;
 import com.example.appointment.system.backend.model.User;
 import com.example.appointment.system.backend.exception.AppErorr;
 import com.example.appointment.system.backend.utils.UserMapper;
@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
 import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
@@ -31,7 +29,7 @@ public class UserController {
     private final UserMapper mapper;
 
     @PostMapping("/auth")
-    public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
+    public ResponseEntity<?> createAuthToken(@RequestBody JwtRequestDTO authRequest) {
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         }catch (BadCredentialsException e){
@@ -39,10 +37,10 @@ public class UserController {
         }
         UserDetails userDetails = userService.loadUserByUsername(authRequest.getUsername());
         String token = jwtTokenUtils.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponce(token));
+        return ResponseEntity.ok(new JwtResponceDTO(token));
     }
     @PostMapping("/reg")
-    public ResponseEntity<?> registration(@RequestBody RegistrationUserDto regUser) {
+    public ResponseEntity<?> registration(@RequestBody RegistrationUserDTO regUser) {
         if (regUser.getUsername() == null || regUser.getPassword() == null ||
                 regUser.getName() == null || regUser.getSecondName() == null ||
                 regUser.getConfirmPassword() == null) {
