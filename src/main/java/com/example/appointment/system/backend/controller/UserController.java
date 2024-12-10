@@ -6,7 +6,7 @@ import com.example.appointment.system.backend.dto.JwtRequestDTO;
 import com.example.appointment.system.backend.dto.RegistrationUserDTO;
 import com.example.appointment.system.backend.model.User;
 import com.example.appointment.system.backend.exception.AppErorr;
-import com.example.appointment.system.backend.utils.UserMapper;
+import com.example.appointment.system.backend.utils.mapper.UserMapper;
 import com.example.appointment.system.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,10 +17,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 @RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;

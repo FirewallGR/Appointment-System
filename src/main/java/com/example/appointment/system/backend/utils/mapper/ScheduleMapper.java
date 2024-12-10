@@ -1,4 +1,4 @@
-package com.example.appointment.system.backend.utils;
+package com.example.appointment.system.backend.utils.mapper;
 
 import com.example.appointment.system.backend.dto.ScheduleRequestDTO;
 import com.example.appointment.system.backend.dto.ScheduleResponseDTO;

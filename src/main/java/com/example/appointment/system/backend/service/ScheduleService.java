@@ -4,7 +4,7 @@ import com.example.appointment.system.backend.dto.ScheduleRequestDTO;
 import com.example.appointment.system.backend.dto.ScheduleResponseDTO;
 import com.example.appointment.system.backend.model.Schedule;
 import com.example.appointment.system.backend.repository.ScheduleRepository;
-import com.example.appointment.system.backend.utils.ScheduleMapper;
+import com.example.appointment.system.backend.utils.mapper.ScheduleMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

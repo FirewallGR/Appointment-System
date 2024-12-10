@@ -1,10 +1,8 @@
 package com.example.appointment.system.backend.model;
 
-import com.example.appointment.system.backend.utils.SlotListConverter;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 

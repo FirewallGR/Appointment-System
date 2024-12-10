@@ -6,8 +6,8 @@ import io.swagger.v3.oas.annotations.info.Info;
 // Настройки для отображения Swagger-ui
 @OpenAPIDefinition(
         info = @Info(
-                title = "Spring-Security JWT API",
-                description = "API, предназначенное для аунтентификации пользователь и получения JWT токена",
+                title = "Medical center API",
+                description = "API, предназначенное для управлением рабочими процессами в медецинских центрах",
                 version = "v1"
         )
 )

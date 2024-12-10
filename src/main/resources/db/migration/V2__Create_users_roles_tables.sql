@@ -30,3 +30,13 @@ CREATE TABLE schedule (
     slots JSONB NOT NULL,
     CONSTRAINT fk_doctor FOREIGN KEY (doctor_id) REFERENCES users (id)
 );
+
+CREATE TABLE medical_records (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    patient_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    doctor_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    report JSONB NOT NULL,
+);
+

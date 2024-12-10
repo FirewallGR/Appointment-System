@@ -1,4 +1,4 @@
-package com.example.appointment.system.backend.utils;
+package com.example.appointment.system.backend.utils.mapper;
 
 import com.example.appointment.system.backend.dto.RegistrationUserDTO;
 import com.example.appointment.system.backend.model.User;
