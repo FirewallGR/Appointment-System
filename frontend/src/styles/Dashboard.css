@@ -1,0 +1,78 @@
+/* src/pages/Dashboard.css */
+
+.client-dashboard {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.tab.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.tab-content {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.tab-content-item {
+    display: block;
+}
+
+.profile-info, .medical-card, .appointments, .chat {
+    margin-top: 10px;
+}
+
+.chat input {
+    padding: 10px;
+    width: 80%;
+    margin-right: 10px;
+}
+
+.chat button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.chat button:hover {
+    background-color: #45a049;
+}
+.dashboard-footer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.dashboard-footer .button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dashboard-footer .logout {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+}
+

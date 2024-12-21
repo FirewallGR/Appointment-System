@@ -1,0 +1,111 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.schedules-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.schedule-box {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    width: 150px;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.schedule-box:hover {
+    transform: scale(1.05);
+}
+
+.slots-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+}
+
+.slot-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    width: 50px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.slot-box.available {
+    background: #d4edda;
+    border-color: #28a745;
+}
+
+.slot-box.booked {
+    background: #f8d7da;
+    border-color: #dc3545;
+}
+
+.slot-editor {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+.slot {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.booked {
+    background-color: red;
+    color: white;
+}
+
+.available {
+    background-color: green;
+    color: white;
+}
