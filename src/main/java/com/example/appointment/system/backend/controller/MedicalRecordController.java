@@ -1,7 +1,7 @@
 package com.example.appointment.system.backend.controller;
 
-import com.example.appointment.system.backend.dto.MedicalRecordRequestDTO;
-import com.example.appointment.system.backend.dto.MedicalRecordResponseDTO;
+import com.example.appointment.system.backend.dto.medicalRecord.MedicalRecordRequestDTO;
+import com.example.appointment.system.backend.dto.medicalRecord.MedicalRecordResponseDTO;
 import com.example.appointment.system.backend.service.MedicalRecordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

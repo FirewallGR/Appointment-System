@@ -1,7 +1,7 @@
 package com.example.appointment.system.backend.controller;
 
-import com.example.appointment.system.backend.dto.ScheduleRequestDTO;
-import com.example.appointment.system.backend.dto.ScheduleResponseDTO;
+import com.example.appointment.system.backend.dto.schedule.ScheduleRequestDTO;
+import com.example.appointment.system.backend.dto.schedule.ScheduleResponseDTO;
 import com.example.appointment.system.backend.service.ScheduleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
