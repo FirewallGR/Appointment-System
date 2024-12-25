@@ -1,4 +1,4 @@
-package com.example.appointment.system.backend.dto;
+package com.example.appointment.system.backend.dto.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class RegistrationUserDTO {
     private String username;
+    private String email;
     private String password;
     private String confirmPassword;
     private String name;

@@ -1,7 +1,7 @@
 package com.example.appointment.system.backend.service;
 
-import com.example.appointment.system.backend.dto.MedicalRecordRequestDTO;
-import com.example.appointment.system.backend.dto.MedicalRecordResponseDTO;
+import com.example.appointment.system.backend.dto.medicalRecord.MedicalRecordRequestDTO;
+import com.example.appointment.system.backend.dto.medicalRecord.MedicalRecordResponseDTO;
 import com.example.appointment.system.backend.exception.AppErorr;
 import com.example.appointment.system.backend.model.MedicalRecord;
 import com.example.appointment.system.backend.model.User;

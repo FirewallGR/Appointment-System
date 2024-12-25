@@ -1,4 +1,4 @@
-package com.example.appointment.system.backend.dto;
+package com.example.appointment.system.backend.dto.medicalRecord;
 
 import lombok.Data;
 

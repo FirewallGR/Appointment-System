@@ -9,10 +9,4 @@ import java.util.UUID;
 
 @Repository
 public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, UUID> {
-
-    List<MedicalRecord> findByPatientId(UUID patientId);
-
-    List<MedicalRecord> findByDoctorId(UUID doctorId);
-
-    List<MedicalRecord> findByDate(java.time.LocalDate date);
 }

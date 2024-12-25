@@ -1,4 +1,4 @@
-package com.example.appointment.system.backend.dto;
+package com.example.appointment.system.backend.dto.schedule;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
