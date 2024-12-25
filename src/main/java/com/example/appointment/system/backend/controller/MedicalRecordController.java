@@ -25,6 +25,11 @@ public class MedicalRecordController {
     public ResponseEntity<MedicalRecordResponseDTO> getRecordById(@PathVariable UUID id) {
         return ResponseEntity.ok(service.getRecordById(id));
     }
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<MedicalRecordResponseDTO>> getRecordsByUserId(@PathVariable UUID userId) {
+        List<MedicalRecordResponseDTO> records = service.getRecordsByUserId(userId);
+        return ResponseEntity.ok(records);
+    }
 
     @PostMapping
     public ResponseEntity<MedicalRecordResponseDTO> createRecord(
@@ -36,6 +41,8 @@ public class MedicalRecordController {
     public ResponseEntity<MedicalRecordResponseDTO> updateRecord(
             @PathVariable UUID id,
             @RequestBody MedicalRecordRequestDTO dto) {
+        System.out.println(dto);
+        System.out.println(id);
         return ResponseEntity.ok(service.updateRecord(id, dto));
     }
 

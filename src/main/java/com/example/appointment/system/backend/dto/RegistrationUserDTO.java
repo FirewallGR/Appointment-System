@@ -12,4 +12,5 @@ public class RegistrationUserDTO {
     private String name;
     private String secondName;
     private String thirdName;
+    private String role;
 }

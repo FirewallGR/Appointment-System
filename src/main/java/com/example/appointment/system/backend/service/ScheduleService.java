@@ -33,11 +33,24 @@ public class ScheduleService {
         return ScheduleMapper.toDTO(schedule);
     }
 
+    public List<ScheduleResponseDTO> getSchedulesByDoctorId(UUID doctorId) {
+        List<Schedule> schedules = scheduleRepository.findByDoctorId(doctorId);
+
+        if (schedules.isEmpty()) {
+            throw new RuntimeException("Schedules not found for doctor with ID: " + doctorId);
+        }
+
+        return schedules.stream()
+                .map(ScheduleMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
     public ScheduleResponseDTO createSchedule(ScheduleRequestDTO dto) {
         Schedule schedule = ScheduleMapper.toEntity(dto);
         schedule = scheduleRepository.save(schedule);
         return ScheduleMapper.toDTO(schedule);
     }
+
 
     public ScheduleResponseDTO updateSchedule(UUID id, ScheduleRequestDTO dto) {
         Schedule existingSchedule = scheduleRepository.findById(id)

@@ -35,6 +35,12 @@ public class MedicalRecordService {
                 new AppErorr(HttpStatus.NOT_FOUND.value(), "Запись не найдена"));
         return mapper.toDto(record);
     }
+    public List<MedicalRecordResponseDTO> getRecordsByUserId(UUID userId) {
+        List<MedicalRecord> medicalRecords = repository.findByPatientId(userId);
+        return medicalRecords.stream()
+                .map(mapper::toDto)
+                .toList();
+    }
 
     public MedicalRecordResponseDTO createRecord(MedicalRecordRequestDTO dto) {
         User patient = userRepository.findById(dto.getPatientId()).orElseThrow(() ->

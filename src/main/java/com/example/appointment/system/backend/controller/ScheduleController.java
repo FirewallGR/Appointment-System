@@ -28,6 +28,14 @@ public class ScheduleController {
     public ResponseEntity<ScheduleResponseDTO> getScheduleById(@PathVariable UUID id) {
         return ResponseEntity.ok(scheduleService.getScheduleById(id));
     }
+    @GetMapping("/doctor/{id}")
+    public ResponseEntity<List<ScheduleResponseDTO>> getScheduleByDoctorId(@PathVariable UUID id) {
+        List<ScheduleResponseDTO> schedules = scheduleService.getSchedulesByDoctorId(id);
+        System.out.println(id);
+        System.out.println(schedules);
+        return ResponseEntity.ok(schedules);
+    }
+
 
     @PostMapping
     public ResponseEntity<ScheduleResponseDTO> createSchedule(
@@ -39,6 +47,7 @@ public class ScheduleController {
     public ResponseEntity<ScheduleResponseDTO> updateSchedule(
             @PathVariable UUID id,
             @RequestBody ScheduleRequestDTO scheduleRequestDTO) {
+        System.out.println(scheduleRequestDTO);
         return ResponseEntity.ok(scheduleService.updateSchedule(id, scheduleRequestDTO));
     }
 

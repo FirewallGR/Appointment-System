@@ -1,5 +1,7 @@
 package com.example.appointment.system.backend.service;
 
+import com.example.appointment.system.backend.dto.DoctorDTO;
+import com.example.appointment.system.backend.dto.UserDTO;
 import com.example.appointment.system.backend.model.User;
 import com.example.appointment.system.backend.repository.RoleRepository;
 import com.example.appointment.system.backend.repository.UserRepository;
@@ -41,11 +43,48 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public void createNewUser(User user){
-        user.setRoles(List.of(roleRepository.findByName("ROLE_PATIENT").get()));
+    public void createNewUser(User user, String role){
+        if(role.equals("client")) {
+            user.setRoles(List.of(roleRepository.findByName("ROLE_PATIENT").get()));
+        } else if (role.equals("doctor")) {
+            user.setRoles(List.of(roleRepository.findByName("ROLE_DOCTOR").get()));
+        } else if (role.equals("manager")) {
+            user.setRoles(List.of(roleRepository.findByName("ROLE_MANAGER").get()));
+        } else {
+            return;
+        }
         userRepository.save(user);
     }
     public void deleteByUsername(String username) {
         userRepository.deleteByUsername(username);
     }
+
+    public List<DoctorDTO> getAllDoctors() {
+        List<User> doctors = userRepository.findByRolesName("ROLE_DOCTOR");
+        return doctors.stream().map(this::mapToDoctorDTO).collect(Collectors.toList());
+    }
+    public List<UserDTO> getAllUsers() {
+        List<User> users =  userRepository.findByRolesName("ROLE_PATIENT");
+        return users.stream().map(this::mapToUserDTO).collect(Collectors.toList());
+    }
+
+
+    private DoctorDTO mapToDoctorDTO(User user) {
+        return new DoctorDTO(
+                user.getId(),
+                user.getName(),
+                user.getSecondName(),
+                user.getThirdName(),
+                user.getUsername()
+        );
+    }
+    private UserDTO mapToUserDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setFirstName(user.getName());
+        userDTO.setLastName(user.getSecondName());
+        userDTO.setMiddleName(user.getThirdName());
+        return userDTO;
+    }
+
 }
