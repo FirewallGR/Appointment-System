@@ -1,7 +1,8 @@
 package com.example.appointment.system.backend;
 
-import com.example.appointment.system.backend.dto.ScheduleRequestDTO;
-import com.example.appointment.system.backend.dto.ScheduleResponseDTO;
+
+import com.example.appointment.system.backend.dto.schedule.ScheduleRequestDTO;
+import com.example.appointment.system.backend.dto.schedule.ScheduleResponseDTO;
 import com.example.appointment.system.backend.model.Schedule;
 import com.example.appointment.system.backend.repository.ScheduleRepository;
 import com.example.appointment.system.backend.service.ScheduleService;
