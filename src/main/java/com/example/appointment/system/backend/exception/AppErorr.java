@@ -1,10 +1,14 @@
 package com.example.appointment.system.backend.exception;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
 @Data
+@Getter
+@Setter
 public class AppErorr extends RuntimeException {
     private int status;
     private String message;

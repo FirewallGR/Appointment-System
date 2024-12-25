@@ -1,7 +1,9 @@
 package com.example.appointment.system.backend.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
@@ -30,6 +32,8 @@ public class Schedule {
     private List<Slot> slots;
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Slot {
         private String time;
         private boolean isBooked;

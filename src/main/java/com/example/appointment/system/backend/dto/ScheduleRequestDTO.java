@@ -1,6 +1,9 @@
 package com.example.appointment.system.backend.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,6 +16,9 @@ public class ScheduleRequestDTO {
     private List<SlotDTO> slots;
 
     @Data
+    @Getter
+    @Setter
+    @AllArgsConstructor
     public static class SlotDTO {
         private String time;
         private boolean isBooked;
