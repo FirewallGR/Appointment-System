@@ -29,6 +29,14 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleService.getScheduleById(id));
     }
 
+    @GetMapping("/doctor/{id}")
+    public ResponseEntity<List<ScheduleResponseDTO>> getScheduleByDoctorId(@PathVariable UUID id) {
+        List<ScheduleResponseDTO> schedules = scheduleService.getSchedulesByDoctorId(id);
+        System.out.println(id);
+        System.out.println(schedules);
+        return ResponseEntity.ok(schedules);
+    }
+
     @PostMapping
     public ResponseEntity<ScheduleResponseDTO> createSchedule(
             @RequestBody ScheduleRequestDTO scheduleRequestDTO) {

@@ -1,5 +1,7 @@
 package com.example.appointment.system.backend.service;
 
+import com.example.appointment.system.backend.dto.user.DoctorDTO;
+import com.example.appointment.system.backend.dto.user.UserDTO;
 import com.example.appointment.system.backend.dto.user.UserRequestDTO;
 import com.example.appointment.system.backend.dto.user.UserResponseDTO;
 import com.example.appointment.system.backend.dto.security.RegistrationUserDTO;
@@ -29,6 +31,10 @@ public class UserService implements org.springframework.security.core.userdetail
     private final RoleRepository roleRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+
+    public Optional<User> findByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
 
     public List<UserResponseDTO> getAllUsers() {
         return StreamSupport.stream(userRepository.findAll().spliterator(), false)
@@ -101,5 +107,19 @@ public class UserService implements org.springframework.security.core.userdetail
             return false;
         }
         return userRepository.findByUsername(regUser.getUsername()).isEmpty();
+    }
+    public List<DoctorDTO> getAllDoctors() {
+        List<User> doctors = userRepository.findByRolesName("ROLE_DOCTOR");
+        return doctors.stream().map(this::mapToDoctorDTO).collect(Collectors.toList());
+    }
+
+    private DoctorDTO mapToDoctorDTO(User user) {
+        return new DoctorDTO(
+                user.getId(),
+                user.getName(),
+                user.getSecondName(),
+                user.getThirdName(),
+                user.getUsername()
+        );
     }
 }
