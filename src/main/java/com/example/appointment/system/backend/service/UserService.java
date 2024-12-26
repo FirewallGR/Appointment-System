@@ -108,6 +108,7 @@ public class UserService implements org.springframework.security.core.userdetail
         }
         return userRepository.findByUsername(regUser.getUsername()).isEmpty();
     }
+
     public List<DoctorDTO> getAllDoctors() {
         List<User> doctors = userRepository.findByRolesName("ROLE_DOCTOR");
         return doctors.stream().map(this::mapToDoctorDTO).collect(Collectors.toList());
