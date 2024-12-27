@@ -8,10 +8,12 @@ import com.example.appointment.system.backend.repository.ChatMessageRepository;
 import com.example.appointment.system.backend.utils.mapper.ChatMessageMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -35,10 +37,17 @@ public class ChatMessageService {
     public List<ChatMessageDTO> findChatMessages(UUID senderId, UUID recipientId) {
         var chatId = chatRoomService.getChatId(senderId, recipientId, false);
         var messages = chatId.map(repository::findByChatId).orElse(List.of());
+        System.out.println(chatId);
+        System.out.println(messages);
+        System.out.println(senderId);
+        System.out.println(recipientId);
         if (!messages.isEmpty()) {
             updateStatuses(senderId, recipientId, MessageStatus.DELIVERED);
+            return messages.stream()
+                    .map(chatMessageMapper::toDto)
+                    .collect(Collectors.toList());
         }
-        return Collections.singletonList(chatMessageMapper.toDto((ChatMessage) messages));
+        return Collections.emptyList();
     }
 
     public ChatMessageDTO findById(UUID id) {
@@ -50,7 +59,7 @@ public class ChatMessageService {
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Message not found (" + id + ")"));
     }
-
+    @Transactional
     public void updateStatuses(UUID senderId, UUID recipientId, MessageStatus status) {
         repository.updateStatuses(senderId, recipientId, status);
     }

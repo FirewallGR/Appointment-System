@@ -9,8 +9,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class DoctorDTO {
     private UUID id;
+    private String username;
+    private String email;
     private String name;
     private String secondName;
     private String thirdName;
-    private String username;
 }
