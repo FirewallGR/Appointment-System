@@ -5,18 +5,21 @@ import com.example.appointment.system.backend.dto.user.UserDTO;
 import com.example.appointment.system.backend.dto.user.UserRequestDTO;
 import com.example.appointment.system.backend.dto.user.UserResponseDTO;
 import com.example.appointment.system.backend.dto.security.RegistrationUserDTO;
+import com.example.appointment.system.backend.model.Role;
 import com.example.appointment.system.backend.model.User;
 import com.example.appointment.system.backend.repository.RoleRepository;
 import com.example.appointment.system.backend.repository.UserRepository;
 import com.example.appointment.system.backend.utils.mapper.UserMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -65,6 +68,21 @@ public class UserService implements org.springframework.security.core.userdetail
         userRepository.save(user);
         return userMapper.toResponseDTO(user);
     }
+    public UserResponseDTO updateUserRole(UUID id, String role) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Role newRole = roleRepository.findByName(role)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+
+        List<Role> updatedRoles = new ArrayList<>();
+        updatedRoles.add(newRole);
+        user.setRoles(updatedRoles);
+
+        userRepository.save(user);
+
+        return userMapper.toResponseDTO(user);
+    }
 
     public void deleteUser(UUID id) {
         if (!userRepository.existsById(id)) {
@@ -75,7 +93,7 @@ public class UserService implements org.springframework.security.core.userdetail
 
     public UserResponseDTO registerUser(RegistrationUserDTO registrationUserDTO) {
         User user = userMapper.RegDtoToUser(registrationUserDTO);
-        user.setPassword(passwordEncoder.encode(user.getPassword())); // Шифрование здесь
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(List.of(roleRepository.findByName("ROLE_PATIENT")
                 .orElseThrow(() -> new RuntimeException("Role not found"))));
         userRepository.save(user);
@@ -109,18 +127,23 @@ public class UserService implements org.springframework.security.core.userdetail
         return userRepository.findByUsername(regUser.getUsername()).isEmpty();
     }
 
-    public List<DoctorDTO> getAllDoctors() {
+    public List<UserDTO> getAllDoctors() {
         List<User> doctors = userRepository.findByRolesName("ROLE_DOCTOR");
-        return doctors.stream().map(this::mapToDoctorDTO).collect(Collectors.toList());
+        return doctors.stream().map(this::mapToUserDTO).collect(Collectors.toList());
+    }
+    public List<UserDTO> getAllClients() {
+        List<User> clients = userRepository.findByRolesName("ROLE_PATIENT");
+        return clients.stream().map(this::mapToUserDTO).collect(Collectors.toList());
     }
 
-    private DoctorDTO mapToDoctorDTO(User user) {
-        return new DoctorDTO(
+    private UserDTO mapToUserDTO(User user) {
+        return new UserDTO(
                 user.getId(),
+                user.getUsername(),
+                user.getEmail(),
                 user.getName(),
                 user.getSecondName(),
-                user.getThirdName(),
-                user.getUsername()
+                user.getThirdName()
         );
     }
 }

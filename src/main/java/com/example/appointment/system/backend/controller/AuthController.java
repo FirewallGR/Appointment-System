@@ -54,4 +54,5 @@ public class AuthController {
         userService.registerUser(regUser);
         return ResponseEntity.ok("{\"result\" : \"Успешная регистрация\"}");
     }
+
 }

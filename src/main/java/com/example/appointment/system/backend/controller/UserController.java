@@ -46,7 +46,6 @@ public class UserController {
             User user = userService.findByUsername(username)
                     .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
 
-            // Собираем роли пользователя
             List<String> roles = user.getRoles().stream()
                     .map(Role::getName)
                     .collect(Collectors.toList());
@@ -67,12 +66,12 @@ public class UserController {
 
     @GetMapping("/doctors")
     public ResponseEntity<?> getAllDoctors() {
-        List<DoctorDTO> doctors = userService.getAllDoctors();
+        List<UserDTO> doctors = userService.getAllDoctors();
         return ResponseEntity.ok(doctors);
     }
-    @GetMapping("/users")
+    @GetMapping("/clients")
     public ResponseEntity<?> getAllPatients() {
-        List<UserResponseDTO> patients = userService.getAllUsers();
+        List<UserDTO> patients = userService.getAllClients();
         return ResponseEntity.ok(patients);
     }
 
@@ -87,6 +86,16 @@ public class UserController {
             @PathVariable UUID id,
             @RequestBody UserRequestDTO userRequestDTO) {
         return ResponseEntity.ok(userService.updateUser(id, userRequestDTO));
+    }
+
+    @PutMapping("/role/{id}/{role}")
+    public ResponseEntity<?> updateRole(
+            @PathVariable UUID id,
+            @PathVariable String role) {
+        userService.updateUserRole(id, role);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "good");
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
