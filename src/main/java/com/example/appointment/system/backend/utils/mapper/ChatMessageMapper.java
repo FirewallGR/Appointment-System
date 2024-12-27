@@ -10,7 +10,7 @@ import java.util.Date;
 public class ChatMessageMapper {
 
     // Преобразование из модели ChatMessage в DTO
-    public static ChatMessageDTO toDto(ChatMessage chatMessage) {
+    public ChatMessageDTO toDto(ChatMessage chatMessage) {
         if (chatMessage == null) {
             return null;
         }
